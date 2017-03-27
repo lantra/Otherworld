@@ -11,5 +11,5 @@ Basic Roadmap:
     3. Advanced story generation
     4. World Simulation
 
-Shoutouts: The developers of [Squidlib] (https://github.com/SquidPony/SquidLib) and Trystan for his awesome Java RL
+Shoutouts: The developers of [Squidlib](https://github.com/SquidPony/SquidLib) and Trystan for his awesome Java RL
 [tutorial](http://trystans.blogspot.com.br/2016/01/roguelike-tutorial-00-table-of-contents.html#comment-form)!
