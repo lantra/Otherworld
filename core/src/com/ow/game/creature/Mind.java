@@ -11,9 +11,9 @@ import squidpony.squidmath.RNG;
 public class Mind
 {
     protected Creature creature;
-    private int av, dv;
+    protected int av, dv;
     protected RNG rng;
-    private LOS los;
+    protected LOS los;
 
     public Mind (Creature c)
     {
