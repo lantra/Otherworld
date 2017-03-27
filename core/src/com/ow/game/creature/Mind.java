@@ -1,6 +1,7 @@
 package com.ow.game.creature;
 
 import com.ow.game.creature.jobs.*;
+import squidpony.squidgrid.LOS;
 import squidpony.squidmath.RNG;
 
 /**
@@ -11,7 +12,8 @@ public class Mind
 {
     protected Creature creature;
     private int av, dv;
-    private RNG rng;
+    protected RNG rng;
+    private LOS los;
 
     public Mind (Creature c)
     {
@@ -20,6 +22,7 @@ public class Mind
         this.av = 0;
         this.dv = 0;
         this.rng = new RNG();
+        los = new LOS();
     }
 
     public int getWeaponAVMod() { return 0;
@@ -45,6 +48,12 @@ public class Mind
     public int getDamageV()
     {
         return (this.creature.getStr() / 4) + rng.between(1,4);
+    }
+
+    public boolean canSeeTarget(Creature c)
+    {
+        return los.isReachable(creature.getWorld().decoDungeon, creature.getCoord().x, creature.getCoord().y,
+                c.getCoord().x, c.getCoord().y);
     }
 
     public void onNotify(String format)

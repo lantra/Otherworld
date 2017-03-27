@@ -88,6 +88,7 @@ public class Otherworld extends ApplicationAdapter {
                     case 'W': {
                         //-1 is up on the screen
                         player1.move(0, -1, world.dungeonGen);
+                        creatureTurns();
                         break;
                     }
                     case SquidInput.DOWN_ARROW:
@@ -95,18 +96,22 @@ public class Otherworld extends ApplicationAdapter {
                     case 'S': {
                         //+1 is down on the screen
                         player1.move(0, 1, world.dungeonGen);
+                        creatureTurns();
                         break;
                     }
                     case SquidInput.LEFT_ARROW:
                     case 'a':
                     case 'A': {
                         player1.move(-1, 0, world.dungeonGen);
+                        creatureTurns();
                         break;
                     }
                     case SquidInput.RIGHT_ARROW:
                     case 'd':
                     case 'D': {
                         player1.move(1, 0, world.dungeonGen);
+                        creatureTurns();
+
                         break;
                     }
 
@@ -264,5 +269,13 @@ public class Otherworld extends ApplicationAdapter {
             msgbox.appendWrappingMessage(messages.get(i));
         }
         messages.clear();
+    }
+
+    public void creatureTurns()
+    {
+        for ( int i = 0; i < world.getCreatures().size(); i++)
+        {
+            world.getCreatures().get(i).getAi().doTurn();
+        }
     }
 }

@@ -1,13 +1,13 @@
 package com.ow.game.items;
 
 /**
- * Created by HP User on 3/27/2017.
+ * Created by lantra on 3/27/2017.
  */
 public class Weapon extends Item {
 
-    public Weapon ()
+    public Weapon (String name, char glyph)
     {
-        super();
+        super(name, glyph);
         setEquipable(true);
     }
 }

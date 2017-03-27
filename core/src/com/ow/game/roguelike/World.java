@@ -7,10 +7,14 @@ import com.ow.game.creature.Creature;
 import com.ow.game.factories.CreatureFactory;
 import squidpony.squidgrid.mapping.DungeonGenerator;
 import squidpony.squidgrid.mapping.DungeonUtility;
+import squidpony.squidmath.Coord;
 import squidpony.squidmath.CoordPacker;
 import squidpony.squidmath.RNG;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * world class to handle each level of the game
@@ -94,6 +98,16 @@ public class World {
                 return c;
         }
         return null;
+    }
+    public HashSet<Coord> getImpassable()
+    {
+        HashSet<Coord> cords = new HashSet<Coord>();
+        for ( Creature c: creatures)
+        {
+                cords.add(c.getCoord());
+        }
+
+        return cords;
     }
     public void removeCreature(Creature other) {
         creatures.remove(other);
