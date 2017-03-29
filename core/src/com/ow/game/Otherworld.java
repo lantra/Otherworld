@@ -248,7 +248,7 @@ public class Otherworld extends ApplicationAdapter {
         String spaces = String.valueOf(spaceArray);
 
 
-       
+
         /* r (int i = 0; i < 6; i++) {
             display.putString(0, gridHeight + i + 1, spaces, 0, 1);
             display.putString(2, gridHeight + i + 1, lang[(langIndex + i) % 12], 0, 1);
