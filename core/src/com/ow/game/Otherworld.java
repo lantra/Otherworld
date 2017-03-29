@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.ow.game.creature.*;
 import com.ow.game.items.Item;
 import com.ow.game.roguelike.World;
+import com.ow.game.util.InventoryBasedScreen;
 import squidpony.squidgrid.gui.gdx.*;
 import squidpony.squidgrid.mapping.DungeonUtility;
 import squidpony.squidmath.Coord;
@@ -21,6 +22,9 @@ import java.util.Arrays;
 
 public class Otherworld extends ApplicationAdapter {
     SpriteBatch batch;
+
+
+
 
     private SquidLayers display;
 
@@ -34,6 +38,7 @@ public class Otherworld extends ApplicationAdapter {
     private float secondsWithoutMoves;
     private Creature player;
     private SquidMessageBox msgbox;
+    private InventoryBasedScreen subscreen;
     private Skin skin; //experimental still
 
     @Override
@@ -85,6 +90,12 @@ public class Otherworld extends ApplicationAdapter {
         {
             @Override
             public void handle(char key, boolean alt, boolean ctrl, boolean shift) {
+
+                if (subscreen != null)
+                {
+                    subscreen.respondToUserInput(key);
+                }
+
                 switch (key) {
                     case SquidInput.UP_ARROW:
                     case 'w':
@@ -204,6 +215,7 @@ public class Otherworld extends ApplicationAdapter {
         display.addActor(msgbox);
 
 
+
         stage.addActor(display);
 
 
@@ -247,7 +259,11 @@ public class Otherworld extends ApplicationAdapter {
         Arrays.fill(spaceArray, ' ');
         String spaces = String.valueOf(spaceArray);
 
+        if (subscreen != null)
+        {
+            subscreen.displayOutput(display);
 
+        }
 
         /* r (int i = 0; i < 6; i++) {
             display.putString(0, gridHeight + i + 1, spaces, 0, 1);

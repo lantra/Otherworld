@@ -1,5 +1,6 @@
 package com.ow.game.items;
 
+import squidpony.squidgrid.gui.gdx.SColor;
 import squidpony.squidmath.Coord;
 
 /**
@@ -7,10 +8,11 @@ import squidpony.squidmath.Coord;
  */
 public class Item
 {
-    private boolean isEquipable;
+    protected boolean isEquipable;
     private String name, description;
     private char glyph;
     private Coord coord;
+    private SColor color;
 
     public Item (String name, char glyph)
     {
@@ -38,6 +40,15 @@ public class Item
         this.glyph = glyph;
     }
     public Coord getCoord () {return coord;}
+    public void setCoord(Coord coord) {this.coord = coord;}
     public void setDescription(String description) {this.description = description;}
     public String getDescription(){return description;}
+
+    public SColor getColor() {
+        return color;
+    }
+
+    public void setColor(SColor color) {
+        this.color = color;
+    }
 }

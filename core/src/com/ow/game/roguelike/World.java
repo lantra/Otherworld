@@ -5,6 +5,7 @@ package com.ow.game.roguelike;
  */
 import com.ow.game.creature.Creature;
 import com.ow.game.factories.CreatureFactory;
+import com.ow.game.factories.ItemFactory;
 import com.ow.game.items.Item;
 import squidpony.squidgrid.mapping.DungeonGenerator;
 import squidpony.squidgrid.mapping.DungeonUtility;
@@ -24,6 +25,7 @@ public class World {
     private RNG rng;
     private CreatureFactory creatureFactory;
     private ArrayList<Creature> creatures = new ArrayList<Creature>();
+    private ItemFactory itemFactory;
     private ArrayList<Item> items = new ArrayList<Item>();
     private Creature player;
     public int gridWidth, gridHeight,cellWidth, cellHeight;
@@ -81,12 +83,22 @@ public class World {
             creatures.add(goblin);
         }
 
+        itemFactory = new ItemFactory();
+
+        for (int i = 0; i < 5; i++)
+        {
+            Item rubbish = itemFactory.createJunk(dungeonGen.utility.randomCell(placement));
+            items.add(rubbish);
+        }
+
+
+
     }
 
     public CreatureFactory getCreatureFactory() {
         return creatureFactory;
     }
-
+    public ArrayList<Item> getItems(){return items;}
     public Creature getPlayer() {
         return player;
     }

@@ -1,6 +1,7 @@
-package com.ow.game;
+package com.ow.game.util;
 
 import com.ow.game.creature.Creature;
+import com.ow.game.items.Inventory;
 import com.ow.game.items.Item;
 import squidpony.squidgrid.gui.gdx.SquidInput;
 import squidpony.squidgrid.gui.gdx.SquidLayers;
@@ -20,6 +21,7 @@ public abstract class InventoryBasedScreen extends SquidPanel {
 
     protected abstract String getVerb();
     protected abstract boolean isAcceptable(Item item);
+    protected abstract InventoryBasedScreen use(Item item);
 
 
     public InventoryBasedScreen(Creature player, int gridHeight, int gridWidth){
@@ -67,19 +69,18 @@ public abstract class InventoryBasedScreen extends SquidPanel {
         return lines;
     }
 
-    /*public SquidInput respondToUserInput(KeyEvent key) {
-        char c = key.getKeyChar();
+    public InventoryBasedScreen respondToUserInput(char c) {
 
-        Item[] items = player.inventory().getItems();
+        Item[] items = player.getInventory().getItems();
 
         if (letters.indexOf(c) > -1
                 && items.length > letters.indexOf(c)
                 && items[letters.indexOf(c)] != null
                 && isAcceptable(items[letters.indexOf(c)]))
             return use(items[letters.indexOf(c)]);
-        else if (key.getKeyCode() == KeyEvent.VK_ESCAPE)
+        else if (c == SquidInput.ESCAPE)
             return null;
         else
             return this;
-    }*/
+    }
 }
