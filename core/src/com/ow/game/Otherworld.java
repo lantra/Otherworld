@@ -30,14 +30,14 @@ public class Otherworld extends ApplicationAdapter {
     private ArrayList<Coord> toCursor;
     private ArrayList<Coord> awaitedMoves;
     private float secondsWithoutMoves;
-    private Creature player1;
+    private Creature player;
     private SquidMessageBox msgbox;
 
     @Override
     public void create () {
 
         world = new World();
-        player1 = world.getPlayer();
+        player = world.getPlayer();
         //Some classes in SquidLib need access to a batch to render certain things, so it's a good idea to have one.
         batch = new SpriteBatch();
         //Here we make sure our Stage, which holds any text-based grids we make, uses our Batch.
@@ -87,7 +87,7 @@ public class Otherworld extends ApplicationAdapter {
                     case 'w':
                     case 'W': {
                         //-1 is up on the screen
-                        player1.move(0, -1, world.dungeonGen);
+                        player.move(0, -1, world.dungeonGen);
                         creatureTurns();
                         break;
                     }
@@ -95,21 +95,21 @@ public class Otherworld extends ApplicationAdapter {
                     case 's':
                     case 'S': {
                         //+1 is down on the screen
-                        player1.move(0, 1, world.dungeonGen);
+                        player.move(0, 1, world.dungeonGen);
                         creatureTurns();
                         break;
                     }
                     case SquidInput.LEFT_ARROW:
                     case 'a':
                     case 'A': {
-                        player1.move(-1, 0, world.dungeonGen);
+                        player.move(-1, 0, world.dungeonGen);
                         creatureTurns();
                         break;
                     }
                     case SquidInput.RIGHT_ARROW:
                     case 'd':
                     case 'D': {
-                        player1.move(1, 0, world.dungeonGen);
+                        player.move(1, 0, world.dungeonGen);
                         creatureTurns();
 
                         break;
@@ -250,7 +250,7 @@ public class Otherworld extends ApplicationAdapter {
                 secondsWithoutMoves = 0;
                 Coord m = awaitedMoves.remove(0);
                 toCursor.remove(0);
-                player1.move(m.x - player1.getCoord().getX(), m.y - player1.getCoord().getY(), world.dungeonGen);
+                player.move(m.x - player.getCoord().getX(), m.y - player.getCoord().getY(), world.dungeonGen);
             }
         }
         // if we are waiting for the player's input and get input, process it.

@@ -8,7 +8,7 @@ import squidpony.squidmath.Coord;
 public class Item
 {
     private boolean isEquipable;
-    private String name;
+    private String name, description;
     private char glyph;
     private Coord coord;
 
@@ -38,4 +38,6 @@ public class Item
         this.glyph = glyph;
     }
     public Coord getCoord () {return coord;}
+    public void setDescription(String description) {this.description = description;}
+    public String getDescription(){return description;}
 }
