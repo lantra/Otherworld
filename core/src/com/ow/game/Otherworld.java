@@ -7,8 +7,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.ow.game.creature.*;
+import com.ow.game.items.Item;
 import com.ow.game.roguelike.World;
 import squidpony.squidgrid.gui.gdx.*;
 import squidpony.squidgrid.mapping.DungeonUtility;
@@ -32,6 +34,7 @@ public class Otherworld extends ApplicationAdapter {
     private float secondsWithoutMoves;
     private Creature player;
     private SquidMessageBox msgbox;
+    private Skin skin; //experimental still
 
     @Override
     public void create () {
@@ -188,7 +191,19 @@ public class Otherworld extends ApplicationAdapter {
         //You might be able to get by with the next line instead of the above line, but the former is preferred.
         //Gdx.input.setInputProcessor(input);
         // and then add display, our one visual component, to the list of things that act in Stage.
+
+        skin = new Skin(Gdx.files.internal("core/assets/GDXUISKIN/uiskin.json"));
+
+        Table status = new Table(skin);
+        status.add(new Label("Health: " , skin));
+
+
+
+        status.setPosition(100, 100);
+        display.addActor(status);
         display.addActor(msgbox);
+
+
         stage.addActor(display);
 
 
@@ -211,6 +226,11 @@ public class Otherworld extends ApplicationAdapter {
             // use a brighter light to trace the path to the cursor, from 170 max lightness to 0 min.
             display.highlight(pt.x, pt.y, 100);
         }*/
+        for (Item  item : world.getItems()
+                ) {
+            display.put(item.getCoord().x, item.getCoord().y, item.getGlyph(), item.getColor());
+
+        }
 
         for ( Creature creature : world.getCreatures()
              ) {
@@ -228,6 +248,7 @@ public class Otherworld extends ApplicationAdapter {
         String spaces = String.valueOf(spaceArray);
 
 
+       
         /* r (int i = 0; i < 6; i++) {
             display.putString(0, gridHeight + i + 1, spaces, 0, 1);
             display.putString(2, gridHeight + i + 1, lang[(langIndex + i) % 12], 0, 1);
@@ -259,7 +280,6 @@ public class Otherworld extends ApplicationAdapter {
         }
 
         // stage has its own batch and must be explicitly told to draw(). this also causes it to act().
-
         stage.draw();
     }
 
