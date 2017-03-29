@@ -5,6 +5,7 @@ package com.ow.game.roguelike;
  */
 import com.ow.game.creature.Creature;
 import com.ow.game.factories.CreatureFactory;
+import com.ow.game.items.Item;
 import squidpony.squidgrid.mapping.DungeonGenerator;
 import squidpony.squidgrid.mapping.DungeonUtility;
 import squidpony.squidmath.Coord;
@@ -12,9 +13,7 @@ import squidpony.squidmath.CoordPacker;
 import squidpony.squidmath.RNG;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * world class to handle each level of the game
@@ -25,6 +24,7 @@ public class World {
     private RNG rng;
     private CreatureFactory creatureFactory;
     private ArrayList<Creature> creatures = new ArrayList<Creature>();
+    private ArrayList<Item> items = new ArrayList<Item>();
     private Creature player;
     public int gridWidth, gridHeight,cellWidth, cellHeight;
     public ArrayList<String> messages = new ArrayList<String>();
@@ -115,6 +115,51 @@ public class World {
 
     public ArrayList<Creature> getCreatures(){return creatures;}
 
+
+    public Item item(Coord coord){
+        for ( Item i: items) {
+            if (coord.x == i.getCoord().x && coord.y == i.getCoord().y) {
+                return i;
+            }
+
+        } return null;
+    }
+
+    public void removeItem(Coord coord) {
+        items.remove(item(coord));
+    }
+
+    public void addItemAtEmptySpace(Item item, Coord coord)
+    { //palce holder
+        if (item == null)
+            return;
+        else removeItem(coord);
+        /*
+        List<Coord> coords = new ArrayList<Coord>();
+        List<Coord> checked = new ArrayList<Coord>();
+
+        coords.add(coord);
+
+        while (!coords.isEmpty()){
+            Coord p = coords.removeItem(0);
+            checked.add(p);
+
+            if ()
+                continue;
+
+            if (items[p.x][p.y][p.z] == null){
+                items[p.x][p.y][p.z] = item;
+                Creature c = this.creature(p.x, p.y, p.z);
+                if (c != null)
+                    c.notify("A %s lands between your feet.", item.name());
+                return;
+            } else {
+                List<Point> neighbors = p.neighbors8();
+                neighbors.removeAll(checked);
+                points.addAll(neighbors);
+            }
+        } */
+    }
 
 
 }

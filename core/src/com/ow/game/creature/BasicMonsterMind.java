@@ -24,8 +24,7 @@ public class BasicMonsterMind  extends Mind
 
         if (canSeeTarget(creature.getWorld().getPlayer()))
         { //basic chase behavior
-
-            dMap = new DijkstraMap(creature.getWorld().decoDungeon, DijkstraMap.Measurement.MANHATTAN); //this seems very inneffict not working in constructor though
+             dMap = new DijkstraMap(creature.getWorld().decoDungeon, DijkstraMap.Measurement.MANHATTAN); //seems very inneficant, nullpointer when trying to init in constructor
              ArrayList<Coord> coordMap = dMap.findPath(1, creature.getWorld().getImpassable(), null, creature.getCoord(),
                     creature.getWorld().getPlayer().getCoord());
 

@@ -123,11 +123,20 @@ public class Otherworld extends ApplicationAdapter {
                     case SquidInput.PAGE_UP:
                     {
                         msgbox.nudgeUp();
+                        break;
                     }
 
                     case SquidInput.PAGE_DOWN:
                     {
                         msgbox.nudgeDown();
+                        break;
+                    }
+
+                    case 'g' :
+                    case ',' :
+                    {
+                        world.getPlayer().pickup();
+                        break;
                     }
                 }
             }

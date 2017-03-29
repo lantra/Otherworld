@@ -1,11 +1,14 @@
 package com.ow.game.creature;
 
 
+import com.ow.game.items.Inventory;
+import com.ow.game.items.Item;
 import com.ow.game.roguelike.World;
 import squidpony.squidgrid.gui.gdx.SColor;
 import squidpony.squidgrid.mapping.DungeonGenerator;
 import squidpony.squidmath.Coord;
 import squidpony.squidmath.RNG;
+
 
 /**
  * Controls the stats and basic interactions with world space and other creatures. The mind classes
@@ -21,11 +24,11 @@ public class Creature
     private SColor color;
     private World world;
     private RNG rng;
+    private Inventory inventory;
 
 
 
-    public Creature(String name,  int str, int dex, int agi, int intel, int con, int will, char glyph)
-    {
+    public Creature(String name,  int str, int dex, int agi, int intel, int con, int will, char glyph) {
 
         this.name = name;
         this.str = str;
@@ -42,9 +45,11 @@ public class Creature
         this.maxfocus = calcMaxFocus();
         this.focus = maxfocus;
 
-        this.coord = Coord.get(0,0); //TODO: wtf
+        this.coord = Coord.get(0, 0); //TODO: wtf
 
         this.rng = new RNG();
+
+        inventory = new Inventory(20);
     }
 
 
@@ -96,6 +101,7 @@ public class Creature
     public void setWorld(World world) {
         this.world = world;
     }
+    public Inventory getInventory(){return this.inventory;}
 
 
 
@@ -187,6 +193,25 @@ public class Creature
         }
 
         return builder.toString().trim();
+    }
+
+    public void pickup(){
+        Item item = world.item(coord);
+
+        if (inventory.isFull() || item == null){
+            doAction("grab at the ground");
+        } else {
+            doAction("pickup a %s", item.getName());
+            world.removeItem(coord);
+            inventory.add(item);
+        }
+    }
+
+
+    public void drop(Item item){
+        doAction("drop a " + item.getName());
+        inventory.remove(item);
+        world.addItemAtEmptySpace(item, coord);
     }
 
 
